@@ -43,7 +43,9 @@ class ApprovalTerminationStrategy(TerminationStrategy):
         Termination occurs when the user explicitly states "APPROVED".
         Also extracts HTML code if present in the last Product Owner message.
         """
-        last_message_role, last_message_content = history[-1]
+        last_message = history[-1]
+        last_message_role = last_message[0]
+        last_message_content = last_message[1]
         
         # Check for user approval
         if last_message_role == AuthorRole.USER and "APPROVED" in last_message_content.upper():
